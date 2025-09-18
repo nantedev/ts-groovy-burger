@@ -17,7 +17,7 @@ import { menuAnimation } from "@/theme/animations";
 import { convertStringToBoolean } from "@/utils/string";
 import RibbonAnimated, { ribbonAnimation } from "./RibbonAnimated";
 import { useParams } from "react-router-dom";
-import LoadingMessage from "./Loader";
+import LoadingMessage from "./LoadingMessage";
 
 export default function Menu() {
   const {
@@ -109,7 +109,7 @@ const MenuStyled = styled.div`
   padding: 50px 50px 150px;
   justify-items: center;
   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
-  overflow-y: scroll;
+  overflow-y: hidden;
 
   ${menuAnimation}
 
