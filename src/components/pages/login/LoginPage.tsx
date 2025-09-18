@@ -1,28 +1,41 @@
-import styled from "styled-components"
-import Logo from "@/components/reusable-ui/Logo"
-import LoginForm from "./LoginForm"
+import styled from "styled-components";
+import { LoginContainer } from "./LoginContainer";
+import LoginFooter from "./LoginFooter";
 
 export default function LoginPage() {
   return (
     <LoginPageStyled>
-      <Logo className={"logo-login-page"} />
-      <LoginForm />
+      <div className="left-side">
+        <LoginContainer />
+      </div>
+      <div className="page-bottom">
+        <LoginFooter />
+      </div>
     </LoginPageStyled>
-  )
+  );
 }
 
 const LoginPageStyled = styled.div`
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+
+  .left-side {
+    grid-area: 2 / 1 / 5 / 3;
+  }
+
+  .page-bottom {
+    grid-area: 5 / 1 / 6 / 5;
+  }
 
   ::before {
     content: "";
-    background: url("/images/burger-and-fries-background.jpg") rgba(0, 0, 0, 0.7);
+    background: url("/images/burger-right.jpg") rgba(0, 0, 0, 0.4);
     background-size: cover;
-    background-position: center;
+    background-position: right;
     background-blend-mode: darken;
 
     position: absolute;
@@ -32,8 +45,4 @@ const LoginPageStyled = styled.div`
     bottom: 0;
     z-index: -1;
   }
-
-  .logo-login-page {
-    transform: scale(2.5);
-  }
-`
+`;
