@@ -12,7 +12,7 @@ import Welcome from "./Welcome";
 export default function LoginForm() {
   // state
   const [username, setUsername] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   // comportements
