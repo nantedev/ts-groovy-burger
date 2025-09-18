@@ -20,5 +20,5 @@ const MainLeftSideStyled = styled.div`
   position: relative;
   overflow-y: hidden;
   display: grid;
-  border-bottom-right-radius: ${theme.borderRadius.extraRound};
+  border-bottom-left-radius: ${theme.borderRadius.extraRound};
 `;
