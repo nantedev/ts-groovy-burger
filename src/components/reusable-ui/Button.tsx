@@ -1,29 +1,50 @@
-import styled, { css } from "styled-components"
-import { theme } from "../../theme/theme"
-import { ComponentProps } from "react"
+import styled, { css } from "styled-components";
+import { theme } from "../../theme/theme";
+import { ComponentProps } from "react";
+import Spinner from "./Spinner";
 
-type ButtonVersion = "normal" | "success"
+type ButtonVersion = "normal" | "success";
 
 type ButtonProps = {
-  label: string,
-  Icon?: JSX.Element,
-  version?: ButtonVersion,
-} & ComponentProps<"button">
+  label: string;
+  Icon?: JSX.Element;
+  version?: ButtonVersion;
+  isLoading?: boolean;
+} & ComponentProps<"button">;
 
-export default function Button({ label, Icon, className, version = "normal", onClick, disabled }: ButtonProps) {
+export default function Button({
+  label,
+  Icon,
+  className,
+  version = "normal",
+  onClick,
+  disabled,
+  isLoading,
+}: ButtonProps) {
   return (
-    <ButtonStyled className={className} version={version} onClick={onClick} disabled={disabled}>
-      <span>{label}</span>
-      <div className="icon">{Icon && Icon}</div>
+    <ButtonStyled
+      className={className}
+      version={version}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <span>{label}</span>
+          <div className="icon">{Icon && Icon}</div>
+        </>
+      )}
     </ButtonStyled>
-  )
+  );
 }
 
-type ButtonStyledProps = { version: ButtonVersion }
+type ButtonStyledProps = { version: ButtonVersion };
 
 const ButtonStyled = styled.button<ButtonStyledProps>`
   ${({ version }) => extraStyle[version]};
-`
+`;
 
 const extraStyleNormal = css`
   width: 100%;
@@ -82,7 +103,7 @@ const extraStyleNormal = css`
     justify-content: center;
     align-items: center;
   }
-`
+`;
 
 const extraStyleSuccess = css`
   cursor: pointer;
@@ -103,8 +124,8 @@ const extraStyleSuccess = css`
     background: ${theme.colors.success};
     border: 1px solid ${theme.colors.success};
   }
-`
+`;
 const extraStyle = {
   normal: extraStyleNormal,
   success: extraStyleSuccess,
-}
+};
