@@ -6,11 +6,11 @@ export default function Spinner() {
 }
 
 const SpinnerStyled = styled.div`
-  border: 4px solid white;
-  border-bottom: 4px solid ${theme.colors.primary};
+  border: 2px solid white;
+  border-bottom: 2px solid ${theme.colors.primary};
   border-radius: 50%;
-  width: 1em;
-  height: 1em;
+  width: 11px;
+  height: 11px;
   animation: spin 1s linear infinite;
   margin-right: 0.5em;
 
