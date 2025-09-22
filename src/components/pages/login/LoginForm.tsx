@@ -8,49 +8,40 @@ import Button from "@/components/reusable-ui/Button";
 import { theme } from "@/theme/theme";
 import { authenticateUser } from "@/api/user";
 import Welcome from "./Welcome";
-import z from "zod";
-
-const usernameSchema = z
-  .string()
-  .trim()
-  .min(1, "Veuillez entrer un prénom.")
-  .min(2, "Le prénom doit contenir au moins 2 caractères.")
-  .max(20, "Le prénom ne peut pas dépasser 20 caractères.")
-  .regex(
-    /^[a-zA-Z-]+$/,
-    "Le prénom ne doit contenir que des lettres ou un tiret (-)."
-  );
+import { loginFormValidator } from "./loginFormValidators";
+import { ErrorMessage } from "@/components/reusable-ui/ErrorMessage";
 
 export default function LoginForm() {
   // state
   const [username, setUsername] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
+  const [hasError, setHasError] = useState(true);
 
   // comportements
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsLoading(true);
-    const validation = usernameSchema.safeParse(username);
+
+    const validation = loginFormValidator.safeParse(username);
+
     if (!validation.success) {
+      setHasError(true);
       setError(validation.error.issues[0].message);
-      setIsLoading(false);
       return;
     }
-    setError(null);
+    setIsLoading(true);
+
     const userReceived = await authenticateUser(username);
 
     setTimeout(() => {
+      setUsername("");
       navigate(`order/${userReceived.username}`);
-    }, 2000);
+    }, 1500);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
-    if (error) {
-      setError(null);
-    }
   };
 
   // affichage
@@ -58,7 +49,7 @@ export default function LoginForm() {
     <LoginFormStyled action="submit" onSubmit={handleSubmit}>
       <Welcome />
       <div>
-        <div className="input-container">
+        <div className="input-and-error-message">
           <TextInput
             value={username}
             onChange={handleChange}
@@ -68,7 +59,7 @@ export default function LoginForm() {
             className="input-login"
             version="normal"
           />
-          {error && <div className="error">{error}</div>}
+          {hasError && <ErrorMessage error={error} />}
         </div>
         <Button
           label={"Accéder à mon espace"}
@@ -105,8 +96,12 @@ const LoginFormStyled = styled.form`
     font-size: ${theme.fonts.size.P4};
   }
 
-  .input-container {
-    margin-bottom: 20px;
+  .input-and-error-message {
+    margin: 18px 0;
+
+    .input-login {
+      margin-bottom: 10px;
+    }
   }
 
   .error {
