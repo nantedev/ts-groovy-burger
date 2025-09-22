@@ -61,6 +61,7 @@ export default function LoginForm() {
             Icon={<BsPersonCircle />}
             className="input-login"
             version="normal"
+            aria-required
           />
           {status === "error" && <ErrorMessage error={error} />}
         </div>
