@@ -22,8 +22,9 @@ export default function LoginForm() {
 
     const userReceived = await authenticateUser(username);
 
-    setUsername("");
-    navigate(`order/${userReceived.username}`);
+    setTimeout(() => {
+      navigate(`order/${userReceived.username}`);
+    }, 2000);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
