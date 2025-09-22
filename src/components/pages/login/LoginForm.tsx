@@ -11,13 +11,16 @@ import Welcome from "./Welcome";
 import { loginFormValidator } from "./loginFormValidators";
 import { ErrorMessage } from "@/components/reusable-ui/ErrorMessage";
 
+type Status = "success" | "loading" | "error" | "idle";
+
 export default function LoginForm() {
   // state
   const [username, setUsername] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
+  //const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState<string>("");
-  const [hasError, setHasError] = useState(true);
+  // const [hasError, setHasError] = useState(true);
+  const [status, setStatus] = useState<Status>("idle");
 
   // comportements
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -26,11 +29,11 @@ export default function LoginForm() {
     const validation = loginFormValidator.safeParse(username);
 
     if (!validation.success) {
-      setHasError(true);
+      setStatus("error"); //setHasError(true);
       setError(validation.error.issues[0].message);
       return;
     }
-    setIsLoading(true);
+    setStatus("loading");
 
     const userReceived = await authenticateUser(username);
 
@@ -59,12 +62,12 @@ export default function LoginForm() {
             className="input-login"
             version="normal"
           />
-          {hasError && <ErrorMessage error={error} />}
+          {status === "error" && <ErrorMessage error={error} />}
         </div>
         <Button
           label={"Accéder à mon espace"}
           Icon={<IoChevronForward />}
-          isLoading={isLoading}
+          isLoading={status === "loading"}
         />
       </div>
     </LoginFormStyled>
