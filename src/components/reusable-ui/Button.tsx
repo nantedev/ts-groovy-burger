@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { theme } from "../../theme/theme";
 import { ComponentProps } from "react";
-import Spinner from "./Spinner";
+import { Loader } from "./Loader";
 
 type ButtonVersion = "normal" | "success";
 
@@ -29,7 +29,7 @@ export default function Button({
       disabled={disabled}
     >
       {isLoading ? (
-        <Spinner />
+        <Loader />
       ) : (
         <>
           <span>{label}</span>
