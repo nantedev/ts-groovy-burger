@@ -17,7 +17,7 @@ import { menuAnimation } from "@/theme/animations";
 import { convertStringToBoolean } from "@/utils/string";
 import RibbonAnimated, { ribbonAnimation } from "./RibbonAnimated";
 import { useParams } from "react-router-dom";
-import LoadingMessage from "./Loader";
+import LoadingMessage from "./LoadingMessage";
 
 export default function Menu() {
   const {

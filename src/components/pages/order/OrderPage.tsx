@@ -1,25 +1,25 @@
-import styled from "styled-components"
-import { theme } from "@/theme/theme"
+import styled from "styled-components";
+import { theme } from "@/theme/theme";
 //@ts-ignore
-import Main from "./Main/Main"
-import Navbar from "./Navbar/Navbar"
-import { initialiseUserSession } from "./helpers/initialiseUserSession"
-import { useEffect } from "react"
-import { useParams } from "react-router-dom"
-import { useOrderContext } from "@/context/OrderContext"
+import Main from "./Main/Main";
+import Navbar from "./Navbar/Navbar";
+import { initialiseUserSession } from "./helpers/initialiseUserSession";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useOrderContext } from "@/context/OrderContext";
 
 export default function OrderPage() {
   // state
-  const { username } = useParams()
-  const { setMenu, setBasket } = useOrderContext()
+  const { username } = useParams();
+  const { setMenu, setBasket } = useOrderContext();
 
   // 1e possibilité : vérification via une condition dans le useEffect()
   // 2e possibilité : non-null assertion operator : "!"
   // 3e possibilité : fall-back value (valeur de secours), nullish coalescing (opérateur de coalescence des nuls)
 
   useEffect(() => {
-    if (username) initialiseUserSession(username, setMenu, setBasket)
-  }, [])
+    if (username) initialiseUserSession(username, setMenu, setBasket);
+  }, []);
 
   //affichage (render)
   return (
@@ -29,11 +29,11 @@ export default function OrderPage() {
         <Main />
       </div>
     </OrderPageStyled>
-  )
+  );
 }
 
 const OrderPageStyled = styled.div`
-  background: ${theme.colors.primary};
+  background: ${theme.colors.greyBlue};
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -47,4 +47,4 @@ const OrderPageStyled = styled.div`
     flex-direction: column;
     border-radius: ${theme.borderRadius.extraRound};
   }
-`
+`;
