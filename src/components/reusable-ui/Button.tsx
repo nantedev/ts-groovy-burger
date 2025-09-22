@@ -26,7 +26,7 @@ export default function Button({
       className={className}
       version={version}
       onClick={onClick}
-      disabled={disabled}
+      disabled={isLoading}
     >
       {isLoading ? (
         <Loader />
@@ -78,7 +78,7 @@ const extraStyleNormal = css`
   }
 
   &:disabled {
-    opacity: 50%;
+    opacity: 100%;
     cursor: not-allowed;
     z-index: 2;
   }
