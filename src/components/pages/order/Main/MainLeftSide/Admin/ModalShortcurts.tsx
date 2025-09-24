@@ -6,6 +6,10 @@ type ShortcutsProps = {
   classname?: string;
 };
 
+const deletePermanently = () => {
+  alert("deletePermanently");
+};
+
 export const ModalShortcurts = ({ classname }: ShortcutsProps) => {
   const raccourci = isMac() ? "⌘" : "Ctrl";
 
@@ -14,6 +18,9 @@ export const ModalShortcurts = ({ classname }: ShortcutsProps) => {
       <span className="title">💡 Pour aller plus vite :</span>
       <span className="shortcut-message i">{`${raccourci} + i : Toggle "mode" admin`}</span>
       <span className="shortcut-message j">{`${raccourci} + j : Toggle "panel" admin`}</span>
+      <button onClick={deletePermanently} className="shortcut-message">
+        Ne plus rappeler
+      </button>
     </ModalShortcurtsStyled>
   );
 };
@@ -31,7 +38,7 @@ const ModalShortcurtsStyled = styled.div`
   color: ${theme.colors.white};
   transition: ease-in 100ms;
   gap: 15px;
-  z-index: 2;
+  z-index: 10;
 
   .title {
     font-weight: ${theme.fonts.weights.bold};
