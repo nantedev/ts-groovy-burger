@@ -2,23 +2,19 @@ import { theme } from "@/theme/theme";
 import { isMac } from "@/utils/window";
 import styled from "styled-components";
 
-type ShortcutsProps = {
-  classname?: string;
+type ModalShortcutsProps = {
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const deletePermanently = () => {
-  alert("deletePermanently");
-};
-
-export const ModalShortcurts = ({ classname }: ShortcutsProps) => {
+export const ModalShortcurts = ({ onClick }: ModalShortcutsProps) => {
   const raccourci = isMac() ? "⌘" : "Ctrl";
 
   return (
-    <ModalShortcurtsStyled className={classname}>
+    <ModalShortcurtsStyled>
       <span className="title">💡 Pour aller plus vite :</span>
       <span className="shortcut-message i">{`${raccourci} + i : Toggle "mode" admin`}</span>
       <span className="shortcut-message j">{`${raccourci} + j : Toggle "panel" admin`}</span>
-      <button onClick={deletePermanently} className="shortcut-message">
+      <button onClick={onClick} className="shortcut-message">
         Ne plus rappeler
       </button>
     </ModalShortcurtsStyled>
