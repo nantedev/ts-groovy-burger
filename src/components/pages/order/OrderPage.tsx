@@ -7,6 +7,7 @@ import { initialiseUserSession } from "./helpers/initialiseUserSession";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useOrderContext } from "@/context/OrderContext";
+import { ModalShortcurts } from "./Main/MainLeftSide/Admin/ModalShortcurts";
 
 export default function OrderPage() {
   // state
@@ -24,6 +25,7 @@ export default function OrderPage() {
   //affichage (render)
   return (
     <OrderPageStyled>
+      <ModalShortcurts classname="modal-shortcuts" />
       <div className="container">
         <Navbar />
         <Main />
@@ -38,13 +40,22 @@ const OrderPageStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 5px solid blue;
 
   .container {
     background: red;
+    border: 5px solid red;
     height: 95vh;
     width: 1400px;
     display: flex;
     flex-direction: column;
     border-radius: ${theme.borderRadius.extraRound};
+  }
+  .modal-shortcuts {
+    border: 1px solid green;
+    position: absolute;
+    z-index: 1;
+    top: 40px;
+    left: 40px;
   }
 `;
