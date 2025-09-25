@@ -9,11 +9,19 @@ import { useParams } from "react-router-dom";
 import { useOrderContext } from "@/context/OrderContext";
 import { ModalShortcurts } from "./Main/MainLeftSide/Admin/ModalShortcurts";
 import { getLocalStorage, setLocalStorage } from "@/utils/window";
+import { useCreateKeyboardShortcuts } from "@/hooks/useCreateKeyboardShortcuts";
 
 export default function OrderPage() {
   // state
   const { username } = useParams();
-  const { setMenu, setBasket, isModeAdmin } = useOrderContext();
+  const {
+    setMenu,
+    setBasket,
+    isModeAdmin,
+    setIsModeAdmin,
+    isCollapsed,
+    setIsCollapsed,
+  } = useOrderContext();
   const [isModalShortcutsVisible, setIsModalShortcutsVisible] = useState(
     getLocalStorage("isModalShortcutsVisible") as boolean | null
   );
@@ -21,6 +29,23 @@ export default function OrderPage() {
     setIsModalShortcutsVisible(true);
     setLocalStorage("isModalShortcutsVisible", true);
   }
+
+  const hidePanel = (
+    isModeAdmin: boolean,
+    isCollapsed: boolean,
+    // Type pour une fonction setState de React qui accepte un boolean ou une fonction de mise à jour ou le type de setIsCollapsed quand on fait useState<boolean>()
+    // "Dispatch" = envoyer/déclencher une action de mise à jour d'état
+    setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    if (isModeAdmin) {
+      isModeAdmin && setIsCollapsed(!isCollapsed);
+    }
+  };
+
+  useCreateKeyboardShortcuts("i", () => setIsModeAdmin(!isModeAdmin));
+  useCreateKeyboardShortcuts("j", () =>
+    hidePanel(isModeAdmin, isCollapsed, setIsCollapsed)
+  );
 
   const deletePermanently = () => {
     setLocalStorage("isModalShortcutsVisible", false);
