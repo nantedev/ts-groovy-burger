@@ -18,7 +18,7 @@ export default function Button({
   className,
   version = "normal",
   onClick,
-  disabled,
+  // disabled,
   isLoading,
 }: ButtonProps) {
   return (

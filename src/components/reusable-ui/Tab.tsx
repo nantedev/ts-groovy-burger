@@ -1,12 +1,14 @@
-import styled from "styled-components"
-import { theme } from "@/theme/theme"
+import styled from "styled-components";
+import { theme } from "@/theme/theme";
+import { ADMIN_TAB_LABEL } from "@/constants/tab";
 
 type TabProps = {
-  label: string,
-  Icon?: JSX.Element
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
-  className?: string
-}
+  label: string;
+  Icon?: JSX.Element;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+  index: ADMIN_TAB_LABEL;
+};
 
 export default function Tab({ label, Icon, onClick, className }: TabProps) {
   return (
@@ -14,7 +16,7 @@ export default function Tab({ label, Icon, onClick, className }: TabProps) {
       <div className="icon">{Icon}</div>
       {label && <span className="label">{label}</span>}
     </TabStyled>
-  )
+  );
 }
 
 const TabStyled = styled.button`
@@ -59,4 +61,4 @@ const TabStyled = styled.button`
   .label {
     margin-left: 13px;
   }
-`
+`;
