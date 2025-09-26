@@ -6,16 +6,17 @@ import { fakeCategories } from "@/fakeData/fakeCategories"
 import { CATEGORY_ALL } from "@/constants/categories"
 import { CATEGORY_MENUS } from "@/constants/menus"
 import { updateCategoriesInDB } from "@/api/categories"
+import { Category } from "@/types/Category"
 
 // ensemble des catégories disponibles pour tous les produits du catalog
 export const useCategories = () => {
-  const [categories, setCategories] = useState<any>(fakeCategories.LARGE)
-  const [categoryAll, setCategoryAll] = useState<any>(CATEGORY_ALL)
-  const [categoryMenus, setCategoryMenus] = useState<any>(CATEGORY_MENUS)
+  const [categories, setCategories] = useState<Category[]>(fakeCategories.LARGE)
+  const [categoryAll, setCategoryAll] = useState<Category>(CATEGORY_ALL)
+  const [categoryMenus, setCategoryMenus] = useState<Category>(CATEGORY_MENUS)
 
   // comportements (gestionnaire de state ou "state handlers")
   //@ts-ignore
-  const handleAddCategory = (categoryToAdd: any, username: any) => {
+  const handleAddCategory = (categoryToAdd: Category, username: string) => {
     if (!categories) return
     // 1. copie du tableau
     const categoriesCopy = deepClone(categories)
@@ -29,7 +30,7 @@ export const useCategories = () => {
   }
 
   //@ts-ignore
-  const handleDeleteCategory = (idOfProductToDelete: any, username: any) => {
+  const handleDeleteCategory = (idOfProductToDelete: string, username: string) => {
     if (!categories) return
     //1. copy du state
     const menuCopy = deepClone(categories)
@@ -53,7 +54,7 @@ export const useCategories = () => {
     setCategories(categoriesUpdated)
   }
 
-  const toggleCategoryById = (idCategoryToToggle: any) => {
+  const toggleCategoryById = (idCategoryToToggle: string) => {
     const categoriesUpdated = categories.map((category) => ({
       ...category,
       isActive: category.id === idCategoryToToggle,
@@ -85,7 +86,7 @@ export const useCategories = () => {
   }
 
   //@ts-ignore
-  const handleEditCategory = (productBeingEdited: any, username: any) => {
+  const handleEditCategory = (productBeingEdited: Product, username: string) => {
     // 1. copie du state (deep clone)
     if (!categories) return
     const menuCopy = deepClone(categories)
@@ -102,7 +103,7 @@ export const useCategories = () => {
   }
 
   //@ts-ignore
-  const resetCategories = (username: any) => {
+  const resetCategories = (username: string) => {
     setCategories(fakeCategories.SMALL)
     // syncBothMenus(username, fakeMenu.SMALL)
   }
