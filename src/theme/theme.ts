@@ -23,6 +23,8 @@ const colors = {
 }
 
 export type Color = typeof colors
+export type ColorKeys = keyof typeof colors
+export type ColorValues = Color[keyof typeof colors]
 
 const spacing = {
   xxs: "4px",
