@@ -1,12 +1,17 @@
 import { rotate } from "@/theme/animations";
-import { theme } from "@/theme/theme";
+import { FontSizesKey, theme } from "@/theme/theme";
 import { ImSpinner8 } from "react-icons/im";
 import styled from "styled-components";
+
+type LoaderProps = {
+  variant?: FontSizesKey;
+  color?: string;
+};
 
 export const Loader = ({
   variant = "SM",
   color = theme.colors.greyMedium,
-}: any) => {
+}: LoaderProps) => {
   return (
     <LoaderStyled variant={variant ?? "SM"} color={color}>
       <ImSpinner8 className="rotate-icon" />
@@ -14,7 +19,7 @@ export const Loader = ({
   );
 };
 
-const LoaderStyled = styled.div<any>`
+const LoaderStyled = styled.div<LoaderProps>`
   display: flex;
   align-items: center;
   justify-content: center;

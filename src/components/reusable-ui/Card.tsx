@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import { theme } from "@/theme/theme";
-import Button from "./Button";
+import Button from "./Button.tsx";
 import { TiDelete } from "react-icons/ti";
 import { fadeInFromRight, fadeInFromTop } from "@/theme/animations";
-import { Chips } from "@/components/pages/order/Main/MainLeftSide/CatalogProducts/Chips";
+import { Chips } from "../pages/order/Main/MainLeftSide/CatalogProducts/Chips.tsx";
 import { Category } from "@/types/Category";
 
 type CardProps = {
