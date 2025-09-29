@@ -12,12 +12,12 @@ import {
   IMAGE_NO_STOCK,
 } from "@/constants/product";
 import { isEmpty } from "@/utils/array";
+import LoadingMessage from "./LoadingMessage";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { menuAnimation } from "@/theme/animations";
 import { convertStringToBoolean } from "@/utils/string";
 import RibbonAnimated, { ribbonAnimation } from "./RibbonAnimated";
 import { useParams } from "react-router-dom";
-import LoadingMessage from "./LoadingMessage";
 
 export default function Menu() {
   const {
@@ -71,7 +71,15 @@ export default function Menu() {
   return (
     <TransitionGroup component={MenuStyled} className="menu">
       {menu.map(
-        ({ id, title, imageSource, price, isAvailable, isPublicised }) => {
+        ({
+          id,
+          title,
+          imageSource,
+          price,
+          isAvailable,
+          isPublicised,
+          categories,
+        }) => {
           return (
             <CSSTransition classNames={"menu-animation"} key={id} timeout={300}>
               <div className={cardContainerClassName}>
@@ -90,6 +98,7 @@ export default function Menu() {
                   isOverlapImageVisible={
                     convertStringToBoolean(isAvailable) === false
                   }
+                  categories={categories}
                 />
               </div>
             </CSSTransition>
@@ -105,7 +114,7 @@ const MenuStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
-  grid-row-gap: 60px;
+  grid-row-gap: 100px;
   padding: 50px 50px 150px;
   justify-items: center;
   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
