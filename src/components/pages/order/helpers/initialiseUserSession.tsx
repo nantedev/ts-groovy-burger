@@ -22,18 +22,17 @@ const intialiseBasket = (
 
 const intialiseCategories = async (
   username: string,
-  setCategories: React.Dispatch<React.SetStateAction<Category[] | undefined>>
+  setCategories: React.Dispatch<React.SetStateAction<Category[]>>
 ) => {
-  //@ts-ignore
   const categoriesReceived = await getCategories(username);
-  setCategories(categoriesReceived as Category[]);
+  setCategories(categoriesReceived ?? []);
 };
 
 export const initialiseUserSession = async (
   username: string,
   setMenu: React.Dispatch<React.SetStateAction<Product[] | undefined>>,
   setBasket: React.Dispatch<React.SetStateAction<BasketProductQuantity[]>>,
-  setCategories: React.Dispatch<React.SetStateAction<Category[] | undefined>>
+  setCategories: React.Dispatch<React.SetStateAction<Category[]>>
 ) => {
   await intialiseMenu(username, setMenu);
   await intialiseCategories(username, setCategories);
