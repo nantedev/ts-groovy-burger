@@ -3,7 +3,7 @@ import { theme } from "@/theme/theme";
 import Button from "./Button";
 import { TiDelete } from "react-icons/ti";
 import { fadeInFromRight, fadeInFromTop } from "@/theme/animations";
-import { Chips } from "../pages/order/Main/MainLeftSide/Menu/Chips";
+import { Chips } from "@/components/pages/order/Main/MainLeftSide/CatalogProducts/Chips";
 import { Category } from "@/types/Category";
 
 type CardProps = {
@@ -101,9 +101,9 @@ export default function Card({
 
 type CardStyledProps = {
   isHoverable?: boolean;
+  areChipsVisible?: boolean;
   isSelected?: boolean;
   isMenu?: boolean;
-  areChipsVisible?: boolean;
 };
 
 const CardStyled = styled.div<CardStyledProps>`
@@ -111,7 +111,7 @@ const CardStyled = styled.div<CardStyledProps>`
   border-radius: ${theme.borderRadius.extraRound};
   /* border: 1px solid red; */
   height: ${({ areChipsVisible }) => (areChipsVisible ? "360px" : "330px")};
-  box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
+  box-shadow: ${theme.shadows.medium};
   /* position: relative; */
   display: flex;
   flex-direction: column;

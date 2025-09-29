@@ -10,7 +10,6 @@ type ChipsProps = {
 };
 
 export const Chips = ({ categories }: ChipsProps) => {
-  console.log("categories: ", categories);
   const [isScrollable, setIsScrollable] = useState(false);
   const [isAtEnd, setIsAtEnd] = useState(false);
 

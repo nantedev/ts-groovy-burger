@@ -17,15 +17,18 @@ const intialiseBasket = (
   setBasket: React.Dispatch<React.SetStateAction<BasketProductQuantity[]>>
 ) => {
   const basketReceived = getLocalStorage(username); // localStorage est synchrone, pas besoin de "await".
-  if (basketReceived) setBasket(basketReceived as any);
+  if (basketReceived) setBasket(basketReceived as BasketProductQuantity[]);
 };
 
 const intialiseCategories = async (
   username: string,
   setCategories: React.Dispatch<React.SetStateAction<Category[]>>
 ) => {
+  //@ts-ignore
   const categoriesReceived = await getCategories(username);
-  setCategories(categoriesReceived ?? []);
+  if (categoriesReceived) {
+    setCategories(categoriesReceived as Category[]);
+  }
 };
 
 export const initialiseUserSession = async (
