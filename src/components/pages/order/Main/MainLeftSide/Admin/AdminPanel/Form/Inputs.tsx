@@ -4,6 +4,7 @@ import SelectInput from "@/components/reusable-ui/SelectInput";
 import styled from "styled-components";
 import { getInputTextsConfig, getSelectInputConfig } from "./inputConfig";
 import { Product } from "@/types/Product";
+import { MultiSelect } from "@/components/reusable-ui/MultiSelect";
 
 export type InputsProps = {
   product: Product;
@@ -17,6 +18,8 @@ export const Inputs = React.forwardRef<HTMLInputElement, InputsProps>(
   ({ product, onChange, onFocus, onBlur }, ref) => {
     const inputTexts = getInputTextsConfig(product);
     const inputSelects = getSelectInputConfig(product);
+
+    // state (vide)
 
     // affichage
     return (
@@ -42,13 +45,14 @@ export const Inputs = React.forwardRef<HTMLInputElement, InputsProps>(
         </div>
         {/* CATEGORIES */}
         <div className="categories">
-          <TextInput
+          {/* <TextInput
             {...inputTexts[2]}
             onChange={onChange}
             version="minimalist"
             onFocus={onFocus}
             onBlur={onBlur}
-          />
+          /> */}
+          <MultiSelect />
         </div>
         {/* PRICE */}
         <TextInput
