@@ -7,5 +7,14 @@ export const MultiSelect = ({
   isMulti = true,
   ...otherProps
 }: MultiSelectProps) => {
-  return <Select {...otherProps} isMulti={isMulti} />;
+  return (
+    <Select
+      {...otherProps}
+      isMulti={isMulti}
+      components={{
+        DropdownIndicator: () => null,
+        IndicatorSeparator: () => null,
+      }}
+    />
+  );
 };
