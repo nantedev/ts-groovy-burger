@@ -1,5 +1,6 @@
 import { ComponentProps } from "react";
 import Select from "react-select";
+import { stylesMultiSelect } from "./stylesMultiSelect";
 
 type MultiSelectProps = ComponentProps<typeof Select>;
 
@@ -15,6 +16,7 @@ export const MultiSelect = ({
         DropdownIndicator: () => null,
         IndicatorSeparator: () => null,
       }}
+      styles={stylesMultiSelect}
     />
   );
 };

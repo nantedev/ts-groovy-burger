@@ -4,7 +4,8 @@ import SelectInput from "@/components/reusable-ui/SelectInput";
 import styled from "styled-components";
 import { getInputTextsConfig, getSelectInputConfig } from "./inputConfig";
 import { Product } from "@/types/Product";
-import { MultiSelect } from "@/components/reusable-ui/MultiSelect";
+import { MultiSelect } from "@/components/reusable-ui/MultiSelect/MultiSelect";
+import { useOrderContext } from "@/context/OrderContext";
 
 export type InputsProps = {
   product: Product;
@@ -16,6 +17,7 @@ export type InputsProps = {
 
 export const Inputs = React.forwardRef<HTMLInputElement, InputsProps>(
   ({ product, onChange, onFocus, onBlur }, ref) => {
+    const { categories } = useOrderContext();
     const inputTexts = getInputTextsConfig(product);
     const inputSelects = getSelectInputConfig(product);
 
@@ -52,7 +54,7 @@ export const Inputs = React.forwardRef<HTMLInputElement, InputsProps>(
             onFocus={onFocus}
             onBlur={onBlur}
           /> */}
-          <MultiSelect />
+          <MultiSelect menuPlacement="auto" options={categories} />
         </div>
         {/* PRICE */}
         <TextInput
