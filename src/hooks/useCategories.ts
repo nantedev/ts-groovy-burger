@@ -15,7 +15,6 @@ export const useCategories = () => {
   const [categoryMenus, setCategoryMenus] = useState<Category>(CATEGORY_MENUS)
 
   // comportements (gestionnaire de state ou "state handlers")
-  //@ts-ignore
   const handleAddCategory = (categoryToAdd: Category, username: string) => {
     if (!categories) return
     // 1. copie du tableau

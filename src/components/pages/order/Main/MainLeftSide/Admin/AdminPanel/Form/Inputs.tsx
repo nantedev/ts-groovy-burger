@@ -6,20 +6,28 @@ import { getInputTextsConfig, getSelectInputConfig } from "./inputConfig";
 import { Product } from "@/types/Product";
 import { MultiSelect } from "@/components/reusable-ui/MultiSelect/MultiSelect";
 import { useOrderContext } from "@/context/OrderContext";
+import { FormEvents } from "@/types/FormEvents";
 
 export type InputsProps = {
   product: Product;
-  // onChange: React.ChangeEventHandler<HTMLInputElement> | React.ChangeEventHandler<HTMLSelectElement>
-  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
-  onFocus?: React.FocusEventHandler<HTMLInputElement | HTMLSelectElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement | HTMLSelectElement>;
-};
+} & FormEvents;
 
 export const Inputs = React.forwardRef<HTMLInputElement, InputsProps>(
   ({ product, onChange, onFocus, onBlur }, ref) => {
     const { categories } = useOrderContext();
     const inputTexts = getInputTextsConfig(product);
     const inputSelects = getSelectInputConfig(product);
+
+    const onChangeMulti = (selectedCategories: unknown) => {
+      const eventMulti = {
+        target: {
+          name: "categories",
+          value: selectedCategories,
+        },
+      } as unknown as React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;
+      // Call the onChange handler with the new event
+      onChange && onChange(eventMulti);
+    };
 
     // state (vide)
 
@@ -54,7 +62,11 @@ export const Inputs = React.forwardRef<HTMLInputElement, InputsProps>(
             onFocus={onFocus}
             onBlur={onBlur}
           /> */}
-          <MultiSelect menuPlacement="auto" options={categories} />
+          <MultiSelect
+            menuPlacement="auto"
+            options={categories}
+            onChange={(selectedValues) => onChangeMulti(selectedValues)}
+          />
         </div>
         {/* PRICE */}
         <TextInput

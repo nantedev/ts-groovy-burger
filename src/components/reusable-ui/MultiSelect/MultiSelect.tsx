@@ -2,16 +2,16 @@ import { ComponentProps } from "react";
 import Select from "react-select";
 import { stylesMultiSelect } from "./stylesMultiSelect";
 
-type MultiSelectProps = ComponentProps<typeof Select>;
+type MultiSelectProps<Option> = ComponentProps<typeof Select<Option, true>>;
 
-export const MultiSelect = ({
+export const MultiSelect = <Option,>({
   isMulti = true,
   ...otherProps
-}: MultiSelectProps) => {
+}: MultiSelectProps<Option>) => {
   return (
     <Select
-      {...otherProps}
       isMulti={isMulti}
+      {...otherProps}
       components={{
         DropdownIndicator: () => null,
         IndicatorSeparator: () => null,
