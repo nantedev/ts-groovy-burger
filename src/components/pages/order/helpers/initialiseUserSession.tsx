@@ -25,7 +25,11 @@ const intialiseCategories = async (
   setCategories: React.Dispatch<React.SetStateAction<Category[]>>
 ) => {
   const categoriesReceived = await getCategories(username);
-  setCategories(categoriesReceived ?? []);
+  // Ne mettre à jour que si des catégories sont trouvées en base
+  if (categoriesReceived) {
+    setCategories(categoriesReceived);
+  }
+  // Sinon, garder les catégories par défaut (fakeCategories.LARGE)
 };
 
 export const initialiseUserSession = async (
