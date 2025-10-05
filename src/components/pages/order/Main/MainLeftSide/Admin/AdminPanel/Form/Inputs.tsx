@@ -7,6 +7,7 @@ import { Product } from "@/types/Product";
 import { MultiSelect } from "@/components/reusable-ui/MultiSelect/MultiSelect";
 import { useOrderContext } from "@/context/OrderContext";
 import { FormEvents } from "@/types/FormEvents";
+import { IoPricetag } from "react-icons/io5";
 
 export type InputsProps = {
   product: Product;
@@ -65,7 +66,9 @@ export const Inputs = React.forwardRef<HTMLInputElement, InputsProps>(
           <MultiSelect
             menuPlacement="auto"
             options={categories}
-            onChange={(selectedValues) => onChangeMulti(selectedValues)}
+            onChange={onChangeMulti}
+            customIcon={IoPricetag}
+            placeholder="Catégorie (ex: Boisson)"
           />
         </div>
         {/* PRICE */}
