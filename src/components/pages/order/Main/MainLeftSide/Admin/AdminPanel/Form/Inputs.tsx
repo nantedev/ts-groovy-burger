@@ -8,6 +8,8 @@ import { MultiSelect } from "@/components/reusable-ui/MultiSelect/MultiSelect";
 import { useOrderContext } from "@/context/OrderContext";
 import { FormEvents } from "@/types/FormEvents";
 import { IoPricetag } from "react-icons/io5";
+import { Category } from "@/types/Category";
+import { MultiValue } from "react-select";
 
 export type InputsProps = {
   product: Product;
@@ -19,7 +21,7 @@ export const Inputs = React.forwardRef<HTMLInputElement, InputsProps>(
     const inputTexts = getInputTextsConfig(product);
     const inputSelects = getSelectInputConfig(product);
 
-    const onChangeMulti = (selectedCategories: unknown) => {
+    const onChangeMulti = (selectedCategories: MultiValue<Category>) => {
       const eventMulti = {
         target: {
           name: "categories",
